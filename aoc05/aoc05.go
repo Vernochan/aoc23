@@ -15,6 +15,8 @@ type conversionMap struct {
 	destinationMaterial string
 }
 
+var conversionMaps map[string]conversionMap
+
 func main() {
 	lines := ReadFile("test.txt")
 
@@ -24,7 +26,7 @@ func main() {
 
 	lines = lines[2:]
 
-	conversionMaps := make(map[string]conversionMap, 0)
+	conversionMaps = make(map[string]conversionMap, 0)
 	for len(lines) > 0 {
 		conversionMap, mapLength := getMap(lines)
 		conversionMaps[conversionMap.sourceMaterial] = conversionMap
@@ -46,7 +48,7 @@ func main() {
 		fmt.Println("Adding seeds: ", val2)
 		for i := 0; i < val2; i++ {
 			//seeds = append(seeds, val+i)
-			destinationNumber := getSeedLocation(val+i, conversionMaps)
+			destinationNumber := getSeedLocation(val + i)
 			if destinationNumber < destination {
 				destination = destinationNumber
 			}
@@ -54,20 +56,16 @@ func main() {
 	}
 	fmt.Println("total seeds", len(seeds))
 
-	//	for _, seed := range seeds {
-
-	//	}
-
 	fmt.Println("lowest destination: ", destination)
 }
 
-func getSeedLocation(seed int, conversionsMap map[string]conversionMap) int {
+func getSeedLocation(seed int) int {
 	destinationNumber := seed
 	source := "seed"
 
 	//fmt.Print("seed: ", seed)
 	for source != "location" {
-		cm := conversionsMap[source]
+		cm := conversionMaps[source]
 		newDest := destinationNumber
 		for idx := range cm.sourceStart {
 			if destinationNumber >= cm.sourceStart[idx] && destinationNumber < cm.sourceStart[idx]+cm.lengths[idx] {
