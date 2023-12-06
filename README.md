@@ -23,3 +23,7 @@ Instead putting the values into a useful data structure, i started out doing it 
 
 ## Day 5
 That took a while. Time to compute that is. The final solution now only covers the second puzzle, because i was running late and didn't have time to properly include both (and i've been to lazy to do it now). The final solution takes a lot of time because there are >2 billion seeds to check. It could be improved vastly by parallel processing, which i didn't cover so far. Maybe i will add it later. 
+
+## Day 6
+That was surprisingly quick and simple. Nice change of pace/complexity. I did "overprepare" for the second puzzle, but it took not much time, so i'll just leave it in there. At least i was prepared enough to make the second puzzle super easy again.
+I used an iterative process to calculate the min and max values, even though i'm sure that it can be reasoned out just using maths. Not the most efficient, but i'm not here for math. 
