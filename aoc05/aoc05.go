@@ -30,40 +30,45 @@ func main() {
 	for len(lines) > 0 {
 		conversionMap, mapLength := getMap(lines)
 		conversionMaps[conversionMap.sourceMaterial] = conversionMap
-		//fmt.Println(conversionMap, mapLength)
+
+		// check if there are more maps
 		if len(lines) > mapLength {
 			lines = lines[mapLength+1:]
 		} else {
 			lines = lines[mapLength:]
 		}
 	}
-	y, _ := strconv.Atoi(seedsText[0])
-	destination := y
-	//for _, seed := range seedsText {
+
+	firstSeed, _ := strconv.Atoi(seedsText[0])
+	lowestDestination := firstSeed
+
 	for idx := 0; idx < len(seedsText); idx += 2 {
 		seed := seedsText[idx]
 		seedCount := seedsText[idx+1]
-		val, _ := strconv.Atoi(seed)
-		val2, _ := strconv.Atoi(seedCount)
-		fmt.Println("Adding seeds: ", val2)
-		for i := 0; i < val2; i++ {
-			//seeds = append(seeds, val+i)
-			destinationNumber := getSeedLocation(val + i)
-			if destinationNumber < destination {
-				destination = destinationNumber
+
+		nSeed, _ := strconv.Atoi(seed)
+		nSeedCount, _ := strconv.Atoi(seedCount)
+
+		// print something to show that it's still working
+		fmt.Println("Adding seeds: ", nSeedCount)
+
+		for i := 0; i < nSeedCount; i++ {
+			seedDestination := getSeedLocation(nSeed + i)
+			if seedDestination < lowestDestination {
+				lowestDestination = seedDestination
 			}
 		}
 	}
 	fmt.Println("total seeds", len(seeds))
 
-	fmt.Println("lowest destination: ", destination)
+	fmt.Println("lowest destination: ", lowestDestination)
 }
 
 func getSeedLocation(seed int) int {
 	destinationNumber := seed
 	source := "seed"
 
-	//fmt.Print("seed: ", seed)
+	// the last conversion map ends in "location"
 	for source != "location" {
 		cm := conversionMaps[source]
 		newDest := destinationNumber
@@ -76,15 +81,15 @@ func getSeedLocation(seed int) int {
 
 		source = cm.destinationMaterial
 		destinationNumber = newDest
-		//fmt.Println(" -> ", source, ": ", destinationNumber)
 	}
 	return destinationNumber
 }
 
 func getMap(lines []string) (conversionMap, int) {
 	rowIndex := 0
-	//temperature-to-humidity map:
+
 	sourceMaterial := lines[0][:strings.Index(lines[0], "-")]
+	// line with "sourceMaterial-to-" removed
 	tmpString := lines[0][strings.Index(lines[0], "-")+4:]
 	destinationMaterial := (tmpString)[:strings.Index(tmpString, " ")]
 

@@ -20,3 +20,6 @@ I'm not fully satisfied with my solution, because of the deeply nested code, but
 
 ## Day 4
 Instead putting the values into a useful data structure, i started out doing it the simple way, just generating the value on a line by line basis. When i started the second part, i immediately knew that i should have gone a different route. So i changed everything and suddenly, the second part was way easier. I should have trusted my instincts and gone with that right away.
+
+## Day 5
+That took a while. Time to compute that is. The final solution now only covers the second puzzle, because i was running late and didn't have time to properly include both (and i've been to lazy to do it now). The final solution takes a lot of time because there are >2 billion seeds to check. It could be improved vastly by parallel processing, which i didn't cover so far. Maybe i will add it later. 
