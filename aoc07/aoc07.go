@@ -70,9 +70,9 @@ func main() {
 	for k, v := range hands {
 		v.rank = k + 1
 		sum += v.bid * v.rank
-		fmt.Println(v, ": ", fmt.Sprintf("%x", getHandValue(v)))
+		// fmt.Println(v, ": ", fmt.Sprintf("%x", getHandValue(v)))
 	}
-	//fmt.Println("Puzzle 1", sum)
+	fmt.Println("Puzzle 1", sum)
 
 	sort.Slice(hands, func(i, j int) bool {
 		return handValueWithJokers(hands[i]) < handValueWithJokers(hands[j])
@@ -81,13 +81,27 @@ func main() {
 	for k, v := range hands {
 		v.rank = k + 1
 		sum += v.bid * v.rank
-		fmt.Println(v, ": ", fmt.Sprintf("%x", getHandValue(v)))
+		// fmt.Println(v, ": ", fmt.Sprintf("%x", handValueWithJokers(v)))
 	}
-	fmt.Println("Puzzle 2", sum)
+	fmt.Println("Puzzle 2", sum) //249817836
 }
 
 // high card: 0, one pair: 0x100000, two pair: 0x200000, three of a kind: 0x300000, fullHouse: 0x400000, Four of a kind: 0x500000, Five of a kind: 0x600000
 func getHandValue(h hand) int {
+
+	handValue := 0
+	handValue = getHandBaseValue(h)
+
+	handValue += facesPuzzle1[h.cards[0]] * 0x10000
+	handValue += facesPuzzle1[h.cards[1]] * 0x1000
+	handValue += facesPuzzle1[h.cards[2]] * 0x100
+	handValue += facesPuzzle1[h.cards[3]] * 0x10
+	handValue += facesPuzzle1[h.cards[4]] * 0x1
+
+	return handValue
+}
+
+func getHandBaseValue(h hand) int {
 	handStr := string(h.cards)
 	var isThree, isOnePair bool
 	handValue := 0
@@ -132,34 +146,34 @@ func getHandValue(h hand) int {
 
 	}
 
-	handValue += facesPuzzle1[h.cards[0]] * 0x10000
-	handValue += facesPuzzle1[h.cards[1]] * 0x1000
-	handValue += facesPuzzle1[h.cards[2]] * 0x100
-	handValue += facesPuzzle1[h.cards[3]] * 0x10
-	handValue += facesPuzzle1[h.cards[4]] * 0x1
-
 	return handValue
 }
 
 // high card: 0, one pair: 0x100000, two pair: 0x200000, three of a kind: 0x300000, fullHouse: 0x400000, Four of a kind: 0x500000, Five of a kind: 0x600000
 func handValueWithJokers(h hand) int {
 	handStr := string(h.cards)
-	handValue := getHandValue(h)
-	occurences := strings.Count(string(h.cards), "J")
-	fmt.Print(occurences)
-	for k := range facesPuzzle1 {
+	handValue := getHandBaseValue(h)
+	// occurences := strings.Count(string(h.cards), "J")
+	// fmt.Print(occurences)
+	for k := range facesPuzzle2 {
 		if k == 'J' {
 			continue
 		}
 		newCardString := strings.ReplaceAll(handStr, "J", string(k))
 		newHand := readHand(fmt.Sprintf("%s %d", newCardString, h.bid))
 
-		newHandValue := getHandValue(newHand)
+		newHandValue := getHandBaseValue(newHand)
 		if newHandValue > handValue {
 			handValue = newHandValue
 		}
 
 	}
+
+	handValue += facesPuzzle2[h.cards[0]] * 0x10000
+	handValue += facesPuzzle2[h.cards[1]] * 0x1000
+	handValue += facesPuzzle2[h.cards[2]] * 0x100
+	handValue += facesPuzzle2[h.cards[3]] * 0x10
+	handValue += facesPuzzle2[h.cards[4]] * 0x1
 
 	return handValue
 }
