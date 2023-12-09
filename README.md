@@ -27,3 +27,13 @@ That took a while. Time to compute that is. The final solution now only covers t
 ## Day 6
 That was surprisingly quick and simple. Nice change of pace/complexity. I did "overprepare" for the second puzzle, but it took not much time, so i'll just leave it in there. At least i was prepared enough to make the second puzzle super easy again.
 I used an iterative process to calculate the min and max values, even though i'm sure that it can be reasoned out just using maths. Not the most efficient, but i'm not here for math. 
+
+## Day 7
+There's not much to say today. I really liked the idea. I obviously question my decision to convert a full hand to a single number, but since it worked, i can't really complain ;-)
+What i can complain about is the fact that i didn't spend any time making the code a bit nicer to read (i.e. i used variable names like k and v). Maybe i'll come back to that. 
+
+## Day 8
+Phew. That was a wild ride. The first puzzle was quite easy and easily done. The second though... That was a the sort of puzzle i was fearing the most. In the end, i think it's more of a math puzzle, than a programming puzzle. Yes, programming is necessary to get actual values (in a reasonable time), but the overall problem needed to be solved from a mathematical standpoint. Also, there were some apparent regularities in the given examples, but so far, most of the previous examples left several uncovered edge cases. And today, the apparent regularity needed to be taken as granted for the full puzzle input as well. That is where the puzzle lost me, and it took quite some time to find out what was going on. The naive solution could get an answer, but since it would take roughly 14 trillion (!) steps, it would take _A LOT_ of time. In the end, i was quite frustrated. 
+
+## Day 9
+Recursion time! What a pleasant surprise. I kinda expected, that challenges would be getting way more difficult on the weekend, as one would have more time to spend. At least for this day, that wasn't the case (and also it was back to a "proper" programming solution!). I'm quite happy with my solution. It uses recursion and the code is super readable. Everything is quite compact without loosing any clarity. 

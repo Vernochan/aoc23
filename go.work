@@ -10,4 +10,5 @@ use (
 	./aoc06
 	./aoc07
 	./aoc08
+	./aoc09
 )
