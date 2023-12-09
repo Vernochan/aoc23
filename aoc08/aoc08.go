@@ -27,9 +27,9 @@ func main() {
 	// Puzzle2
 	startingLocations := make(map[string]mapEntry)
 
-	for _, v := range mapEntries {
-		if v.location[2] == 'A' {
-			startingLocations[v.location] = v
+	for _, entry := range mapEntries {
+		if entry.location[2] == 'A' {
+			startingLocations[entry.location] = entry
 		}
 	}
 
