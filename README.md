@@ -37,3 +37,7 @@ Phew. That was a wild ride. The first puzzle was quite easy and easily done. The
 
 ## Day 9
 Recursion time! What a pleasant surprise. I kinda expected, that challenges would be getting way more difficult on the weekend, as one would have more time to spend. At least for this day, that wasn't the case (and also it was back to a "proper" programming solution!). I'm quite happy with my solution. It uses recursion and the code is super readable. Everything is quite compact without loosing any clarity. 
+
+## Day 10
+I don't know that was going on, but for some reason i had huge knots in my head that i couldn't loosen up. In principle, the solutions are both not that difficult, but it took ages to figure out how to do it properly. For the first puzzle, i was kinda torn between a recursive and an iterative solution and somehow i couldn't really concentrate on one of them (and thus constantly mixed up both approaches). When i finally had a proper working solution (iterative, taversing only 1 direction instead of both at the same time), i didn't expect the second puzzle to be much more difficult. And in the end, i must admit that it really isn't. But again, i couldn't wrap my head around my problems. I think i was hovering around the actual solution for about an hour without making any progress. And then it suddenly hit me, and i was done about 5 minutes later. What a demoralizing progress.
+I hope it was just my accumulated lack of sleep from the last week.
