@@ -46,6 +46,10 @@ func getConfigurations(line string, nums []int) int {
 	numIndex := 0
 	for i := 0; i < potentialIdx; i++ {
 
+		// Fallunterscheidung:
+		// 1 => zusammenhängende Spring (? oder #)     => retVal += 1 + getconfugurations(string[nums[0]:], nums[1:])
+		// 2 => hängt nicht zusammen/gehört nicht dazu => retVal += getconfigurations(string[1:], nums)
+
 		if line[i] == '#' {
 			springLen++
 			if springLen == nums[numIndex] {
