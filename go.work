@@ -16,4 +16,5 @@ use (
 	./aoc12
 	./aoc14
 	./aoc15
+	./aoc16
 )
