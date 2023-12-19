@@ -6,39 +6,80 @@ import (
 	"strings"
 )
 
+func findLongestRepeatingSequence(numbers []int) []int {
+	for length := len(numbers); length > 0; length-- {
+		for start := 0; start <= len(numbers)-length; start++ {
+			sequence := numbers[start : start+length]
+			for i := start + 1; i <= len(numbers)-length; i++ {
+				if sequenceEqual(sequence, numbers[i:i+length]) {
+					return sequence
+				}
+			}
+		}
+	}
+	return nil
+}
+func sequenceEqual(seq1, seq2 []int) bool {
+	if len(seq1) != len(seq2) {
+		return false
+	}
+	for i, value := range seq1 {
+		if value != seq2[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func main() {
 
 	lines := ReadFile("test.txt")
 	field := parseLines(lines)
-	tiltedField := field // tiltWest(field)
+	tiltedField := field // tiltWest(field) (puzzle 1)
 
-	//sum := countLoad(tiltedField)
-	//lastcycle := 0
-	for i := 0; i < 2000; i++ {
+	sums := make([]int, 0)
+	// add 0 to maintain correct position
+	sums = append(sums, 0)
+
+	seenBoards := make(map[string]int, 0)
+	board := ""
+
+	cycleLength := 0 //39
+	i := 1
+	for i < 1000000000 {
 		tiltedField = tiltNorth(tiltedField)
 		tiltedField = tiltWest(tiltedField)
 		tiltedField = tiltSouth(tiltedField)
 		tiltedField = tiltEast(tiltedField)
 
 		sum := countLoad(tiltedField)
-		// if sum == 100467 {
-		// 	// repeats every 39 lines
-		// 	fmt.Println("100467 at cycle", i, " diff: ", i-lastcycle)
-		// 	lastcycle = i
-		// }
-		if i%39 == 1000000000%39 {
-			fmt.Println(i, "  Load: ", sum)
+
+		sums = append(sums, sum)
+
+		board = generateHash(field)
+
+		if _, ok := seenBoards[board]; ok {
+			break
 		}
-		//fmt.Println(i, "  Load: ", sum)
+
+		seenBoards[board] = i
+		i++
 	}
 
-	// fmt.Println("Load: ", sum)
-	for _, row := range tiltedField {
-		for _, col := range row {
-			fmt.Printf("%c", col)
-		}
-		fmt.Print("\n")
+	repeatedIndex := seenBoards[board]
+	cycleLength = i - repeatedIndex
+	idx := repeatedIndex + (1000000000-repeatedIndex)%cycleLength
+
+	fmt.Println("Cycle: ", cycleLength)
+	fmt.Println("Sum: ", sums[idx])
+}
+
+func generateHash(field [][]rune) string {
+	result := ""
+	for _, row := range field {
+		result += string(row)
 	}
+	return result
 }
 
 func countLoad(field [][]rune) int {
